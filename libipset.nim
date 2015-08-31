@@ -284,8 +284,8 @@ proc ipset_parse_ip4_single6*(session: ptr ipset_session; opt: ipset_opt;
 proc ipset_parse_ip4_net6*(session: ptr ipset_session; opt: ipset_opt;
                            str: cstring): cint {.cdecl,
     importc: "ipset_parse_ip4_net6", dynlib: libipset.}
-proc ipset_parse_name*(session: ptr ipset_session; opt: ipset_opt; str: cstring): cint {.
-    cdecl, importc: "ipset_parse_name", dynlib: libipset.}
+#proc ipset_parse_name*(session: ptr ipset_session; opt: ipset_opt; str: cstring): cint {.
+#    cdecl, importc: "ipset_parse_name", dynlib: libipset.}
 proc ipset_parse_before*(session: ptr ipset_session; opt: ipset_opt;
                          str: cstring): cint {.cdecl,
     importc: "ipset_parse_before", dynlib: libipset.}
@@ -424,8 +424,6 @@ proc ipset_session_init*(outfn: ipset_outfn): ptr ipset_session {.cdecl,
     importc: "ipset_session_init", dynlib: libipset.}
 proc ipset_session_fini*(session: ptr ipset_session): cint {.cdecl,
     importc: "ipset_session_fini", dynlib: libipset.}
-proc ipset_debug_msg*(dir: cstring; buffer: pointer; len: cint) {.cdecl,
-    importc: "ipset_debug_msg", dynlib: libipset.}
 
 proc ipset_cache_add*(name: cstring; `type`: ptr ipset_type; family: uint8): cint {.
     cdecl, importc: "ipset_cache_add", dynlib: libipset.}
@@ -457,20 +455,4 @@ const
   IPSET_CMD_ALIASES* = 3
 
 
-proc ipset_match_cmd*(arg: cstring; name: ptr cstring): bool {.cdecl,
-    importc: "ipset_match_cmd", dynlib: libipset.}
-proc ipset_match_option*(arg: cstring; name: ptr cstring): bool {.cdecl,
-    importc: "ipset_match_option", dynlib: libipset.}
-proc ipset_match_envopt*(arg: cstring; name: ptr cstring): bool {.cdecl,
-    importc: "ipset_match_envopt", dynlib: libipset.}
-proc ipset_shift_argv*(argc: ptr cint; argv: ptr cstring; `from`: cint) {.cdecl,
-    importc: "ipset_shift_argv", dynlib: libipset.}
 proc ipset_port_usage*() {.cdecl, importc: "ipset_port_usage", dynlib: libipset.}
-proc ipset_parse_file*(s: ptr ipset_session; opt: cint; str: cstring): cint {.
-    cdecl, importc: "ipset_parse_file", dynlib: libipset.}
-
-proc in4cpy*(dest, src: ptr InAddr) {.inline, cdecl.} =
-  dest.s_addr = src.s_addr
-
-proc in6cpy*(dest, src: ptr In6Addr) {.inline, cdecl.} =
-  shallowCopy(dest[], src[])
