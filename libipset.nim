@@ -420,7 +420,7 @@ proc ipset_cmd*(session: ptr ipset_session; cmd: ipset_cmd_enum; lineno: uint32)
     cdecl, importc: "ipset_cmd", dynlib: libipset.}
 proc ipset_session_outfn*(session: ptr ipset_session; outfn: ipset_outfn): cint {.
     cdecl, importc: "ipset_session_outfn", dynlib: libipset.}
-proc ipset_session_init*(outfn: ipset_outfn): ptr ipset_session {.cdecl,
+proc ipset_session_init*(outfn: proc (fmt: cstring) {.cdecl, varargs.}): ptr ipset_session {.cdecl,
     importc: "ipset_session_init", dynlib: libipset.}
 proc ipset_session_fini*(session: ptr ipset_session): cint {.cdecl,
     importc: "ipset_session_fini", dynlib: libipset.}
